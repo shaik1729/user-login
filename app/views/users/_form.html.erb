@@ -1,0 +1,63 @@
+<%= form_with(model: user, local: true, id: 'registration') do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field control">
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+
+    <div class="control">
+      <div id="next">
+        <a href="javascript:void(0);">next</a>
+      </div>
+    </div>
+
+  <div class="field control" style="display: none;">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="field control" style="display: none;">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <div class="actions control" style="display: none;">
+    <%= form.submit %>
+  </div>
+<% end %>
+ 
+<%# <section id='email_section'>
+  <div class="form-container">
+    <h1>registration</h1>
+    <form action="welcome.html" id="registration">
+      <div class="control">
+        <label for="name">Email</label>
+        <input type="email" id="email" required/>
+      </div>
+      <input type="password" id="password" required  style="display: none;"/>
+      <div class="control">
+        <div id="next">
+          <a href="javascript:void(0);">next</a>
+        </div>
+      </div>
+    </form>
+    <p><a href="../index.html">Have an account ? login</a></p>
+  </div>
+</section>
+<section id="password_section" style="display: none;">
+  <div id="parent">
+    <marquee behavior="" direction=""
+      >pop 8 balloons to set as password
+    </marquee>
+  </div>
+</section> %>

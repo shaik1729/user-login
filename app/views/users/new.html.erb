@@ -1,0 +1,103 @@
+<section id='email_section'>
+      <div class="form-container">
+        <h1>registration</h1>
+        <%= render 'form', user: @user %>
+        <p><a href="../index.html">Have an account ? login</a></p>
+      </div>
+    </section>
+    <section id="password_section" style="display: none;">
+      <div id="parent">
+        <marquee behavior="" direction=""
+          >pop 8 balloons to set as password
+        </marquee>
+      </div>
+    </section>
+    <script>
+      $("#next a").on('click', function(){
+        if($("#user_email").valid()){
+          $("#email_section").hide();
+          $("#password_section").show();
+        }
+      });
+      if(document.getElementById('parent')){
+    var test = document.getElementById('parent');
+    var randomchar = new Array(50);
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    var password = null;
+
+
+    for (var i = 0; i < 50; i++) {
+        randomchar[i] = possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    // while(true) {
+
+    //     if (bcount == 7) {
+    //         $('div.message')[0].remove();
+    //         bcount = 6;
+    //     }
+    //     if (bcount == 0) {
+    //         bcount += 1;
+    //     }
+    //     i = Math.floor(Math.random() * possible.length)
+    //     test.innerHTML += '<div class="message" id = "balloon' + i + '" onClick="drop_and_getval(id,\'' + randomchar[i] + '\')"><img src="/assets/b' + bcount + '.png" alt=""><h2 style="color: rgb(7, 25, 212); margin-top: -300px; margin-left: 50px;">' + randomchar[i] + '</h2></div>';
+    //     bcount += 1;
+    // }
+    
+    function createBalloons(){
+      console.log(randomchar);
+      bcount = 0
+      while(bcount < 7) {
+
+        if (bcount == 7) {
+            $('div.message')[0].remove();
+            bcount = 6;
+        }
+        if (bcount == 0) {
+            bcount += 1;
+        }
+        i = Math.floor(Math.random() * randomchar.length)
+        console.log(i);
+        
+        test.innerHTML += '<div class="message" id = "balloon' + i + '" onClick="drop_and_getval(id,\'' + randomchar[i] + '\')"><img src="/assets/b' + bcount + '.png" alt=""><h2 style="color: rgb(7, 25, 212); margin-top: -300px; margin-left: 50px;">' + randomchar[i] + '</h2></div>';
+        bcount += 1;
+      }
+    }
+    while(true){
+    setTimeout(createBalloons, 3000);
+    }
+
+    let count = 0;
+    function drop_and_getval(idOfImageDiv, str1) {
+        
+        if (typeof (str1) == "number") {
+            str1 = String(str1);
+        }
+
+        if (password == null) {
+            password = str1;
+        }
+        else {
+            password = password + str1;
+        }
+        let elem = document.getElementById(idOfImageDiv);
+        elem.parentNode.removeChild(elem);
+        count++;
+        if (count == 8) {
+            confirm("Selected password is: "+password);
+            $("#user_password").val(password);
+            $("#user_password_confirmation").val(password);
+            $("form#registration").submit();
+        }
+    }
+    }
+    </script>
+<!--    
+<section id='email_section'>
+    <div class="form-container">
+        <h1>New User</h1>
+        <%= render 'form', user: @user %>   
+        <%= link_to '< Back', users_path %>
+    </div>
+</section>
+-->
